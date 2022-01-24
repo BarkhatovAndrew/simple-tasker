@@ -1,11 +1,14 @@
 import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import App from './components/App/App.jsx';
-import './normalize.css';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
+    <CssBaseline />
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root'),
 );
