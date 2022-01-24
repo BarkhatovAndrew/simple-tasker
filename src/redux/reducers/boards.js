@@ -1,4 +1,4 @@
-import { CREATE_BOARD, DELETE_BOARD } from '../../helpers/ActionTypes';
+import { CREATE_BOARD, DELETE_BOARD, RENAME_BOARD } from '../../helpers/ActionTypes';
 
 const initialState = {
   boards: [],
@@ -15,6 +15,19 @@ function boards(state = initialState, action) {
       const newBoards = state.boards.filter((item) => item.id !== action.payload);
       return {
         ...state, boards: newBoards,
+      };
+    }
+    case RENAME_BOARD: {
+      const copyBoards = state.boards.map((item) => {
+        if (item.id === action.payload.id) {
+          // eslint-disable-next-line no-param-reassign
+          item.title = action.payload.title;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        boards: copyBoards,
       };
     }
     default:

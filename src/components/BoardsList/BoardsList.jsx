@@ -12,8 +12,8 @@ function BoardsList() {
           Your boards:
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-        {boards.map((item) => <Board title={item.title} id={item.id} />)}
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {boards.map((item) => <Board title={item.title} id={item.id} key={item.id} />)}
       </Box>
     </>
   );
