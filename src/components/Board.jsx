@@ -2,13 +2,18 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box, Button, Input, Typography,
+  Box,
+  Button,
+  Input,
+  Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import uniqid from 'uniqid';
-import { CREATE_TASK, RENAME_BOARD, SHOW_MODAL } from '../helpers/ActionTypes';
+import {
+  CREATE_TASK, RENAME_BOARD, SHOW_MODAL_BOARD,
+} from '../helpers/ActionTypes';
 import TasksList from './TasksList.jsx';
 
 function Board({ title, id }) {
@@ -16,7 +21,6 @@ function Board({ title, id }) {
 
   const [renameForm, setRenameForm] = useState(false);
   const [renameInput, setRenameInput] = useState(title);
-  // const show = useSelector((state) => state.modal.show);
 
   const tasks = useSelector((state) => state.tasks.tasks);
 
@@ -25,7 +29,7 @@ function Board({ title, id }) {
   };
 
   const showDeleteFormFunc = () => {
-    dispatch({ type: SHOW_MODAL });
+    dispatch({ type: SHOW_MODAL_BOARD, payload: id });
   };
 
   const showRenameBoardInput = () => {
@@ -66,7 +70,7 @@ function Board({ title, id }) {
         ) : (
           <Typography
             variant='h5'
-            sx={{ marginTop: 5 }}
+            sx={{ marginTop: 5, cursor: 'pointer' }}
             onClick={showRenameBoardInput}>
             {title}
           </Typography>
@@ -83,19 +87,18 @@ function Board({ title, id }) {
         <Accordion sx={{ width: '275px' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
+            aria-controls='panel1a-content'
+            id='panel1a-header'>
             <Typography>Settings</Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant='contained'
-            color='error'
-            sx={{ margin: 1 }}
-            onClick={showDeleteFormFunc}>
-            Delete board
-          </Button>
+            <Button
+              variant='contained'
+              color='error'
+              sx={{ margin: 1 }}
+              onClick={showDeleteFormFunc}>
+              Delete board
+            </Button>
           </AccordionDetails>
         </Accordion>
       </Box>
