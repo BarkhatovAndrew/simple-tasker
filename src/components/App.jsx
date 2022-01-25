@@ -1,7 +1,14 @@
 import {
-  Container, Typography, Modal, Box, Button,
+  Container,
+  Typography,
+  Modal,
+  Box,
+  Button,
+  OutlinedInput,
+  TextField,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import Header from './Header.jsx';
 import AddBoard from './AddBoard.jsx';
 import Footer from './Footer.jsx';
@@ -9,6 +16,7 @@ import BoardsList from './BoardsList.jsx';
 import {
   DELETE_BOARD,
   DELETE_TASK,
+  EDIT_TASK,
   SHOW_EDIT_TASK,
   SHOW_MODAL_BOARD,
   SHOW_MODAL_TASK,
@@ -23,7 +31,12 @@ function App() {
   const id = useSelector((state) => state.modal.id);
   const boardId = useSelector((state) => state.modal.boardId);
   const showModalEdit = useSelector((state) => state.modal.showEditTask);
-  // const taskId = useSelector((state) => state.modal.taskId);
+  const taskId = useSelector((state) => state.modal.taskId);
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const darkmode = useSelector((state) => state.darkmode.dark);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const deleteTask = () => {
     dispatch({ type: DELETE_TASK, payload: id });
@@ -44,6 +57,21 @@ function App() {
   };
 
   const showModalEditFunc = () => {
+    const taskToEdit = tasks.find((item) => item.id === taskId);
+    setTitle(taskToEdit.title);
+    dispatch({ type: SHOW_EDIT_TASK });
+  };
+
+  const editInput = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const editDesc = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const saveChanges = () => {
+    dispatch({ type: EDIT_TASK, payload: { id: taskId, title, description } });
     dispatch({ type: SHOW_EDIT_TASK });
   };
 
@@ -60,7 +88,17 @@ function App() {
   };
 
   return (
-    <Container>
+    <Container
+      maxWidth
+      sx={
+        darkmode
+          ? {
+            backgroundColor: '#1a1a1a', height: '100vh', padding: 5, color: 'white', transition: '1s',
+          }
+          : {
+            backgroundColor: 'white', height: '100vh', padding: 5, transition: '1s',
+          }
+      }>
       <Header />
       <AddBoard />
       {boards.length > 0 ? (
@@ -133,13 +171,24 @@ function App() {
             Edit your task
           </Typography>
           <Typography variant='h7'>
-
+            <OutlinedInput
+              sx={{ width: '100%', marginBottom: 1 }}
+              value={title}
+              onChange={editInput}
+            />
+            <TextField
+              multiline
+              rows={5}
+              sx={{ width: '100%' }}
+              value={description}
+              onChange={editDesc}
+            />
           </Typography>
           <Button
             variant='contained'
             type='submit'
-            sx={{ margin: 1, width: '100%' }}
-            onClick={showModalEditFunc}>
+            sx={{ marginTop: 1, width: '100%' }}
+            onClick={saveChanges}>
             Save
           </Button>
         </Box>

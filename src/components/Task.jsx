@@ -22,12 +22,17 @@ function Task({ title, description, id }) {
       <Card
         sx={{
           margin: 2,
-          minWidth: '275px',
+          width: '275px',
           marginBottom: 0,
-          cursor: 'pointer',
         }}>
         <CardContent
-          sx={{ padding: 2, display: 'flex', flexDirection: 'column' }}>
+          sx={{
+            padding: 2,
+            display: 'flex',
+            flexWrap: 'wrap',
+            flexDirection: 'column',
+            wordBreak: 'break-all',
+          }}>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
             {title}
           </Typography>

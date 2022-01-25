@@ -56,7 +56,7 @@ function Board({ title, id }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          width: '30%',
+          width: '20%',
         }}>
         {renameForm ? (
           <form onSubmit={renameBoard}>
@@ -84,7 +84,7 @@ function Board({ title, id }) {
         </Button>
         {tasks.length > 0 ? <TasksList boardId={id} /> : null}
 
-        <Accordion sx={{ width: '275px' }}>
+        <Accordion sx={{ width: '275px', marginTop: 2 }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1a-content'
@@ -95,7 +95,6 @@ function Board({ title, id }) {
             <Button
               variant='contained'
               color='error'
-              sx={{ margin: 1 }}
               onClick={showDeleteFormFunc}>
               Delete board
             </Button>
