@@ -1,7 +1,7 @@
 import { Button, Box } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import uniqid from 'uniqid';
-import { CREATE_BOARD } from '../../helpers/ActionTypes';
+import { CREATE_BOARD } from '../helpers/ActionTypes';
 
 function AddBoard() {
   const dispatch = useDispatch();

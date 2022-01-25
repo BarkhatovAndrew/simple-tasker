@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
-import Task from '../Task/Task.jsx';
+import {
+  Typography,
+} from '@mui/material';
+import Task from './Task.jsx';
 
 function TasksList({ boardId }) {
   const tasks = useSelector((state) => state.tasks.tasks)
