@@ -97,10 +97,10 @@ function App() {
       sx={
         darkmode
           ? {
-            backgroundColor: '#1a1a1a', height: '100vh', padding: 5, color: 'white',
+            backgroundColor: '#1a1a1a', height: '100vh', padding: 5, color: 'white', transition: '.5s',
           }
           : {
-            backgroundColor: 'white', height: '100vh', padding: 5,
+            backgroundColor: 'white', height: '100vh', padding: 5, transition: '.5s',
           }
       }>
       <Header />

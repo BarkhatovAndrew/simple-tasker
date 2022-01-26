@@ -1,5 +1,7 @@
+const dark = JSON.parse(localStorage.getItem('dark'));
+
 const initialState = {
-  dark: false,
+  dark,
 };
 
 // eslint-disable-next-line default-param-last
