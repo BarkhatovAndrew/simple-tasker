@@ -10,8 +10,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './Header.jsx';
 import AddBoard from './AddBoard.jsx';
-import Footer from './Footer.jsx';
 import BoardsList from './BoardsList.jsx';
+import style from '../helpers/styles';
 import {
   DELETE_BOARD,
   DELETE_TASK,
@@ -34,9 +34,10 @@ function App() {
   const showModalEdit = useSelector((state) => state.modal.showEditTask);
   const taskId = useSelector((state) => state.modal.taskId);
   const darkmode = useSelector((state) => state.darkmode.dark);
-
   const title = useSelector((state) => state.editForm.title);
   const description = useSelector((state) => state.editForm.description);
+
+  // TODO: как редактировать body ?
 
   if (darkmode) {
     document.body.style.backgroundColor = '#1a1a1a';
@@ -79,18 +80,6 @@ function App() {
     dispatch({ type: SHOW_EDIT_TASK });
   };
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
   return (
     <Container
       maxWidth
@@ -112,7 +101,6 @@ function App() {
           There no boards yet
         </Typography>
       )}
-      <Footer />
 
       {/* TODO: в каком компоненте использовать модальные окна */}
 

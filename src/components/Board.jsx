@@ -47,8 +47,7 @@ function Board({ title, id }) {
 
   const createTask = (e) => {
     e.preventDefault();
-    const taskId = uniqid();
-    dispatch({ type: CREATE_TASK, payload: { id: taskId, boardId: id } });
+    dispatch({ type: CREATE_TASK, payload: { id: uniqid(), boardId: id } });
   };
 
   return (

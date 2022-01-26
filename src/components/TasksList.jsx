@@ -1,13 +1,12 @@
 import { useSelector } from 'react-redux';
-import {
-  Typography,
-} from '@mui/material';
+import { Typography } from '@mui/material';
 import { useEffect } from 'react';
 import Task from './Task.jsx';
 
 function TasksList({ boardId }) {
-  const tasks = useSelector((state) => state.tasks.tasks)
-    .filter((item) => item.boardId === boardId);
+  const tasks = useSelector((state) => state.tasks.tasks).filter(
+    (item) => item.boardId === boardId,
+  );
 
   const allTasks = useSelector((state) => state.tasks.tasks);
 
@@ -17,9 +16,11 @@ function TasksList({ boardId }) {
 
   return (
     <>
-      {tasks.length > 0
-        ? <Typography variant='h6'>Tasks:</Typography>
-        : <Typography variant='h6'>Create your first task</Typography>}
+      {tasks.length > 0 ? (
+        <Typography variant='h6'>Tasks:</Typography>
+      ) : (
+        <Typography variant='h6'>Create your first task</Typography>
+      )}
       {tasks.map((item) => (
         <Task
           id={item.id}

@@ -1,17 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
-// import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DARK_MODE_ON } from '../helpers/ActionTypes';
 
 function Header() {
   const dispatch = useDispatch();
   const dark = useSelector((state) => state.darkmode.dark);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('dark') === 'true') { dispatch({ type: DARK_MODE_ON }); } else {
-  //     localStorage.setItem('dark', false);
-  //   }
-  // }, [dispatch]);
 
   const darkOn = () => {
     dispatch({ type: DARK_MODE_ON });

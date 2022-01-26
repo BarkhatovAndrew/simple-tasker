@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 // TODO: ^^^^^^^
 
-let allTasks = JSON.parse(localStorage.getItem('tasks'));
-
-if (allTasks === null) allTasks = [];
+const allTasks = JSON.parse(localStorage.getItem('tasks')) === null
+  ? []
+  : JSON.parse(localStorage.getItem('tasks'));
 
 const initialState = {
   tasks: allTasks,
@@ -15,9 +15,15 @@ function tasks(state = initialState, action) {
     case 'CREATE_TASK':
       return {
         ...state,
-        tasks: [...state.tasks, {
-          id: action.payload.id, title: 'New task', description: 'Type your text here...', boardId: action.payload.boardId,
-        }],
+        tasks: [
+          ...state.tasks,
+          {
+            id: action.payload.id,
+            title: 'New task',
+            description: 'Type your text here...',
+            boardId: action.payload.boardId,
+          },
+        ],
       };
     case 'EDIT_TASK': {
       const copyTasks = [...state.tasks].map((item) => {
@@ -28,12 +34,14 @@ function tasks(state = initialState, action) {
         return item;
       });
       return {
-        ...state, tasks: copyTasks,
+        ...state,
+        tasks: copyTasks,
       };
     }
     case 'DELETE_TASK':
       return {
-        ...state, tasks: state.tasks.filter((item) => item.id !== action.payload),
+        ...state,
+        tasks: state.tasks.filter((item) => item.id !== action.payload),
       };
     default:
       return state;
