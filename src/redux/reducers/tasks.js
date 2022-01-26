@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+// TODO: ^^^^^^^
 
 const allTasks = JSON.parse(localStorage.getItem('tasks'));
 

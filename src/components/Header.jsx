@@ -11,7 +11,7 @@ function Header() {
     if (localStorage.getItem('dark') === 'true') { dispatch({ type: DARK_MODE_ON }); } else {
       localStorage.setItem('dark', false);
     }
-  }, []);
+  }, [dispatch]);
 
   const darkOn = () => {
     dispatch({ type: DARK_MODE_ON });
