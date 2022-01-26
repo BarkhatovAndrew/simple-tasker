@@ -2,11 +2,18 @@ import { useSelector } from 'react-redux';
 import {
   Typography,
 } from '@mui/material';
+import { useEffect } from 'react';
 import Task from './Task.jsx';
 
 function TasksList({ boardId }) {
   const tasks = useSelector((state) => state.tasks.tasks)
     .filter((item) => item.boardId === boardId);
+
+  const allTasks = useSelector((state) => state.tasks.tasks);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(allTasks));
+  }, [allTasks]);
 
   return (
     <>

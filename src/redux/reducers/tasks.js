@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
+
+const allTasks = JSON.parse(localStorage.getItem('tasks'));
+
 const initialState = {
-  tasks: [],
+  tasks: allTasks,
 };
 
 // eslint-disable-next-line default-param-last
