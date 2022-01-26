@@ -1,12 +1,18 @@
 import { CREATE_BOARD, DELETE_BOARD, RENAME_BOARD } from '../../helpers/ActionTypes';
 
+const boardList = JSON.parse(localStorage.getItem('boards'));
+
 const initialState = {
-  boards: [],
+  boards: boardList,
 };
 
 // eslint-disable-next-line default-param-last
 function boards(state = initialState, action) {
   switch (action.type) {
+    case 'INIT_GROUPS':
+      return {
+        ...state, boards: action.payload,
+      };
     case CREATE_BOARD:
       return {
         ...state, boards: [...state.boards, { title: 'New board', id: action.payload }],

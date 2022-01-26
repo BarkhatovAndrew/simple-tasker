@@ -1,9 +1,18 @@
 import { Typography, Box } from '@mui/material';
+// import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+// import { INIT_GROUPS } from '../helpers/ActionTypes';
 import Board from './Board.jsx';
 
 function BoardsList() {
+  // const dispatch = useDispatch();
+
   const boards = useSelector((state) => state.boards.boards);
+
+  // useEffect(() => {
+  //   const boardList = JSON.parse(localStorage.getItem('boards'));
+  //   dispatch({ type: INIT_GROUPS, payload: boardList });
+  // }, [dispatch]);
 
   return (
     <>
