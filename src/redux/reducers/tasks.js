@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
 // TODO: ^^^^^^^
 
-const allTasks = JSON.parse(localStorage.getItem('tasks'));
+let allTasks = JSON.parse(localStorage.getItem('tasks'));
+
+if (allTasks === null) allTasks = [];
 
 const initialState = {
   tasks: allTasks,

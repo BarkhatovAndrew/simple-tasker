@@ -38,6 +38,12 @@ function App() {
   const title = useSelector((state) => state.editForm.title);
   const description = useSelector((state) => state.editForm.description);
 
+  if (darkmode) {
+    document.body.style.backgroundColor = '#1a1a1a';
+  } else {
+    document.body.style.backgroundColor = 'white';
+  }
+
   const deleteTask = () => {
     dispatch({ type: DELETE_TASK, payload: id });
     dispatch({ type: SHOW_MODAL_TASK });

@@ -1,4 +1,6 @@
-const boardList = JSON.parse(localStorage.getItem('boards'));
+let boardList = JSON.parse(localStorage.getItem('boards'));
+
+if (boardList === null) boardList = [];
 
 const initialState = {
   boards: boardList,
