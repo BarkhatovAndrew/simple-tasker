@@ -21,7 +21,7 @@ function Header() {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', margin: 0 }}>
       <Typography variant='h2'>
-       Hello
+       Simple Tasker
       </Typography>
       <Button sx={{ position: 'fixed', right: '10%' }} onClick={darkOn}>Dark mode</Button>
     </Box>

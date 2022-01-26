@@ -23,6 +23,7 @@ function Board({ title, id }) {
   const [renameInput, setRenameInput] = useState(title);
 
   const tasks = useSelector((state) => state.tasks.tasks);
+  const dark = useSelector((state) => state.darkmode.dark);
 
   const handleRenameInput = (e) => {
     setRenameInput(e.target.value);
@@ -64,7 +65,7 @@ function Board({ title, id }) {
             <Input
               value={renameInput}
               onChange={handleRenameInput}
-              sx={{ marginTop: 5, fontSize: '18px' }}
+              sx={dark ? { marginTop: 5, fontSize: '18px', color: 'white' } : { marginTop: 5, fontSize: '18px' }}
               autoFocus
             />
           </form>
