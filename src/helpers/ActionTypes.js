@@ -12,3 +12,6 @@ export const SHOW_MODAL_BOARD = 'SHOW_MODAL_BOARD';
 export const SHOW_EDIT_TASK = 'SHOW_EDIT_TASK';
 
 export const DARK_MODE_ON = 'DARK_MODE_ON';
+
+export const HANDLE_TITLE = 'HANDLE_TITLE';
+export const HANDLE_DESCRIPTION = 'HANDLE_DESCRIPTION';

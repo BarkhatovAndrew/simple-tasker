@@ -8,7 +8,6 @@ import {
   TextField,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import Header from './Header.jsx';
 import AddBoard from './AddBoard.jsx';
 import Footer from './Footer.jsx';
@@ -17,6 +16,8 @@ import {
   DELETE_BOARD,
   DELETE_TASK,
   EDIT_TASK,
+  HANDLE_DESCRIPTION,
+  HANDLE_TITLE,
   SHOW_EDIT_TASK,
   SHOW_MODAL_BOARD,
   SHOW_MODAL_TASK,
@@ -32,11 +33,10 @@ function App() {
   const boardId = useSelector((state) => state.modal.boardId);
   const showModalEdit = useSelector((state) => state.modal.showEditTask);
   const taskId = useSelector((state) => state.modal.taskId);
-  const tasks = useSelector((state) => state.tasks.tasks);
   const darkmode = useSelector((state) => state.darkmode.dark);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const title = useSelector((state) => state.editForm.title);
+  const description = useSelector((state) => state.editForm.description);
 
   const deleteTask = () => {
     dispatch({ type: DELETE_TASK, payload: id });
@@ -57,17 +57,15 @@ function App() {
   };
 
   const showModalEditFunc = () => {
-    const taskToEdit = tasks.find((item) => item.id === taskId);
-    setTitle(taskToEdit.title);
     dispatch({ type: SHOW_EDIT_TASK });
   };
 
   const editInput = (e) => {
-    setTitle(e.target.value);
+    dispatch({ type: HANDLE_TITLE, payload: e.target.value });
   };
 
   const editDesc = (e) => {
-    setDescription(e.target.value);
+    dispatch({ type: HANDLE_DESCRIPTION, payload: e.target.value });
   };
 
   const saveChanges = () => {
@@ -109,6 +107,9 @@ function App() {
         </Typography>
       )}
       <Footer />
+
+      {/* TODO: в каком компоненте использовать модальные окна */}
+
       <Modal
         open={showModalTask}
         onClose={showModalTaskFunc}

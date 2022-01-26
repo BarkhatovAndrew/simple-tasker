@@ -1,19 +1,26 @@
 import {
   Typography, Card, CardContent, Box,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
-import { SHOW_EDIT_TASK, SHOW_MODAL_TASK } from '../helpers/ActionTypes';
+import {
+  HANDLE_DESCRIPTION, HANDLE_TITLE, SHOW_EDIT_TASK, SHOW_MODAL_TASK,
+} from '../helpers/ActionTypes';
 
 function Task({ title, description, id }) {
   const dispatch = useDispatch();
+
+  const tasks = useSelector((state) => state.tasks.tasks);
 
   const showModal = () => {
     dispatch({ type: SHOW_MODAL_TASK, payload: id });
   };
 
   const showEditTask = () => {
+    const editTask = tasks.find((item) => item.id === id);
+    dispatch({ type: HANDLE_TITLE, payload: editTask.title });
+    dispatch({ type: HANDLE_DESCRIPTION, payload: editTask.description });
     dispatch({ type: SHOW_EDIT_TASK, payload: id });
   };
 
