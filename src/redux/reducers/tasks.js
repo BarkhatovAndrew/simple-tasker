@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 // TODO: ^^^^^^^
 
 const allTasks = JSON.parse(localStorage.getItem('tasks')) === null
@@ -28,8 +27,11 @@ function tasks(state = initialState, action) {
     case 'EDIT_TASK': {
       const copyTasks = [...state.tasks].map((item) => {
         if (item.id === action.payload.id) {
-          item.title = action.payload.title;
-          item.description = action.payload.description;
+          return {
+            ...item,
+            title: action.payload.title,
+            description: action.payload.description,
+          };
         }
         return item;
       });
