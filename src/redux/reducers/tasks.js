@@ -1,8 +1,6 @@
-// TODO: ^^^^^^^
+import { CREATE_TASK, DELETE_TASK, EDIT_TASK } from '../actionTypes/ActionTypes';
 
-const allTasks = JSON.parse(localStorage.getItem('tasks')) === null
-  ? []
-  : JSON.parse(localStorage.getItem('tasks'));
+const allTasks = JSON.parse(localStorage.getItem('tasks')) ?? [];
 
 const initialState = {
   tasks: allTasks,
@@ -11,7 +9,7 @@ const initialState = {
 // eslint-disable-next-line default-param-last
 function tasks(state = initialState, action) {
   switch (action.type) {
-    case 'CREATE_TASK':
+    case CREATE_TASK:
       return {
         ...state,
         tasks: [
@@ -24,7 +22,7 @@ function tasks(state = initialState, action) {
           },
         ],
       };
-    case 'EDIT_TASK': {
+    case EDIT_TASK: {
       const copyTasks = [...state.tasks].map((item) => {
         if (item.id === action.payload.id) {
           return {
@@ -40,7 +38,7 @@ function tasks(state = initialState, action) {
         tasks: copyTasks,
       };
     }
-    case 'DELETE_TASK':
+    case DELETE_TASK:
       return {
         ...state,
         tasks: state.tasks.filter((item) => item.id !== action.payload),

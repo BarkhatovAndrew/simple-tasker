@@ -1,7 +1,7 @@
 export const CREATE_BOARD = 'CREATE_BOARD';
 export const DELETE_BOARD = 'DELETE_BOARD';
 export const RENAME_BOARD = 'RENAME_BOARD';
-export const INIT_GROUPS = 'INIT_GROUPS';
+export const INIT_BOARDS = 'INIT_BOARDS';
 
 export const CREATE_TASK = 'CREATE_TASK';
 export const EDIT_TASK = 'EDIT_TASK';

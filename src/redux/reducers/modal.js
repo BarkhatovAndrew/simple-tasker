@@ -1,3 +1,5 @@
+import { SHOW_EDIT_TASK, SHOW_MODAL_BOARD, SHOW_MODAL_TASK } from '../actionTypes/ActionTypes';
+
 const initialState = {
   show: false,
   showBoard: false,
@@ -10,15 +12,15 @@ const initialState = {
 // eslint-disable-next-line default-param-last
 function modal(state = initialState, action) {
   switch (action.type) {
-    case 'SHOW_MODAL_TASK':
+    case SHOW_MODAL_TASK:
       return {
         ...state, show: !state.show, id: action.payload,
       };
-    case 'SHOW_MODAL_BOARD':
+    case SHOW_MODAL_BOARD:
       return {
         ...state, showBoard: !state.showBoard, boardId: action.payload,
       };
-    case 'SHOW_EDIT_TASK':
+    case SHOW_EDIT_TASK:
       return {
         ...state, showEditTask: !state.showEditTask, taskId: action.payload,
       };

@@ -12,72 +12,54 @@ import Header from './Header.jsx';
 import AddBoard from './AddBoard.jsx';
 import BoardsList from './BoardsList.jsx';
 import style from '../helpers/styles';
-import {
-  DELETE_BOARD,
-  DELETE_TASK,
-  EDIT_TASK,
-  HANDLE_DESCRIPTION,
-  HANDLE_TITLE,
-  SHOW_EDIT_TASK,
-  SHOW_MODAL_BOARD,
-  SHOW_MODAL_TASK,
-} from '../helpers/ActionTypes';
+import { deleteBoardAC } from '../redux/actionCreators/boardsAC';
+import { handleDescriptionAC, handleTitleAC } from '../redux/actionCreators/editFormAC';
+import { editTaskAC, deleteTaskAC } from '../redux/actionCreators/tasksAC';
+import { showModalTaskAC, showModalBoardAC } from '../redux/actionCreators/modalAC';
 
 function App() {
   const dispatch = useDispatch();
 
-  const boards = useSelector((state) => state.boards.boards);
   const showModalTask = useSelector((state) => state.modal.show);
   const showModalBoard = useSelector((state) => state.modal.showBoard);
-  const id = useSelector((state) => state.modal.id);
-  const boardId = useSelector((state) => state.modal.boardId);
   const showModalEdit = useSelector((state) => state.modal.showEditTask);
-  const taskId = useSelector((state) => state.modal.taskId);
   const darkmode = useSelector((state) => state.darkmode.dark);
-  const title = useSelector((state) => state.editForm.title);
-  const description = useSelector((state) => state.editForm.description);
-
-  // TODO: как редактировать body ?
-
-  if (darkmode) {
-    document.body.style.backgroundColor = '#1a1a1a';
-  } else {
-    document.body.style.backgroundColor = 'white';
-  }
+  const { boards } = useSelector((state) => state.boards);
+  const { id, boardId, taskId } = useSelector((state) => state.modal);
+  const { title, description } = useSelector((state) => state.editForm);
 
   const deleteTask = () => {
-    dispatch({ type: DELETE_TASK, payload: id });
-    dispatch({ type: SHOW_MODAL_TASK });
+    dispatch(deleteTaskAC(id));
+    dispatch(showModalTaskAC());
   };
 
   const deleteBoard = () => {
-    dispatch({ type: DELETE_BOARD, payload: boardId });
-    dispatch({ type: SHOW_MODAL_BOARD });
+    dispatch(deleteBoardAC(boardId));
+    dispatch(showModalBoardAC());
   };
 
   const showModalTaskFunc = () => {
-    dispatch({ type: SHOW_MODAL_TASK });
+    dispatch(showModalTaskAC());
   };
 
   const showModalBoardFunc = () => {
-    dispatch({ type: SHOW_MODAL_BOARD });
+    dispatch(showModalBoardAC());
   };
 
   const showModalEditFunc = () => {
-    dispatch({ type: SHOW_EDIT_TASK });
+    dispatch(editTaskAC());
   };
 
   const editInput = (e) => {
-    dispatch({ type: HANDLE_TITLE, payload: e.target.value });
+    dispatch(handleTitleAC(e.target.value));
   };
 
   const editDesc = (e) => {
-    dispatch({ type: HANDLE_DESCRIPTION, payload: e.target.value });
+    dispatch(handleDescriptionAC(e.target.value));
   };
 
   const saveChanges = () => {
-    dispatch({ type: EDIT_TASK, payload: { id: taskId, title, description } });
-    dispatch({ type: SHOW_EDIT_TASK });
+    dispatch(editTaskAC({ id: taskId, title, description }));
   };
 
   return (

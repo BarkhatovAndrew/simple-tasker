@@ -19,7 +19,8 @@ function TasksList({ boardId }) {
       {tasks.length > 0 ? (
         <Typography variant='h6'>Tasks:</Typography>
       ) : (
-        <Typography variant='h6'>Create your first task</Typography>
+        <Typography variant='h6'>Create your first task
+        </Typography>
       )}
       {tasks.map((item) => (
         <Task

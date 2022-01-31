@@ -8,12 +8,12 @@ function BoardsList() {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography variant='h4'>
-          Your boards
-        </Typography>
+        <Typography variant='h4'>Your boards</Typography>
       </Box>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {boards.map((item) => <Board title={item.title} id={item.id} key={item.id} />)}
+        {boards.map((item) => (
+          <Board title={item.title} id={item.id} key={item.id} />
+        ))}
       </Box>
     </>
   );

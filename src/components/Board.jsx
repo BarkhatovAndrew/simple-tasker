@@ -11,10 +11,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import uniqid from 'uniqid';
-import {
-  CREATE_TASK, RENAME_BOARD, SHOW_MODAL_BOARD,
-} from '../helpers/ActionTypes';
 import TasksList from './TasksList.jsx';
+import { renameBoardAC } from '../redux/actionCreators/boardsAC';
+import { createTaskAC } from '../redux/actionCreators/tasksAC';
+import { showModalBoardAC } from '../redux/actionCreators/modalAC';
 
 function Board({ title, id }) {
   const dispatch = useDispatch();
@@ -22,15 +22,15 @@ function Board({ title, id }) {
   const [renameForm, setRenameForm] = useState(false);
   const [renameInput, setRenameInput] = useState(title);
 
-  const tasks = useSelector((state) => state.tasks.tasks);
-  const dark = useSelector((state) => state.darkmode.dark);
+  const { tasks } = useSelector((state) => state.tasks);
+  const { dark } = useSelector((state) => state.darkmode);
 
   const handleRenameInput = (e) => {
     setRenameInput(e.target.value);
   };
 
   const showDeleteFormFunc = () => {
-    dispatch({ type: SHOW_MODAL_BOARD, payload: id });
+    dispatch(showModalBoardAC(id));
   };
 
   const showRenameBoardInput = () => {
@@ -41,13 +41,13 @@ function Board({ title, id }) {
     e.preventDefault();
     if (renameInput.length > 0) {
       setRenameForm(!renameForm);
-      dispatch({ type: RENAME_BOARD, payload: { id, title: renameInput } });
+      dispatch(renameBoardAC({ id, title: renameInput }));
     }
   };
 
   const createTask = (e) => {
     e.preventDefault();
-    dispatch({ type: CREATE_TASK, payload: { id: uniqid(), boardId: id } });
+    dispatch(createTaskAC({ id: uniqid(), boardId: id }));
   };
 
   return (
@@ -64,7 +64,11 @@ function Board({ title, id }) {
             <Input
               value={renameInput}
               onChange={handleRenameInput}
-              sx={dark ? { marginTop: 5, fontSize: '18px', color: 'white' } : { marginTop: 5, fontSize: '18px' }}
+              sx={
+                dark
+                  ? { marginTop: 5, fontSize: '18px', color: 'white' }
+                  : { marginTop: 5, fontSize: '18px' }
+              }
               autoFocus
             />
           </form>
